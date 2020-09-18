@@ -27,9 +27,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
   buildGraph() {
     this.diagram = $(go.Diagram, 'myDiagramDiv');
 
-    const SPARK_STROKEWIDTH = 1;
-    const SPARK_INTERVAL = 10;
-    const BASELINE_LENGTH = 40;
+    const SPARK_STROKEWIDTH = 2;
+    const SPARK_INTERVAL = 25;
+    const BASELINE_LENGTH = 30;
 
     function makeStringFromValues(values) {
       if (values.length < 1) { return 'M 0 ' + values + ' L ' + BASELINE_LENGTH + ' 0'; }
