@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
 
   public static getWeatherApiUrl() {
-    return 'http://api.openweathermap.org/data/2.5/onecall';
+    return 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/onecall';
   }
 
   public static getApiId() {
