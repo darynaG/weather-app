@@ -1,0 +1,7 @@
+#myDiagramDiv {
+  min-width: 500px;
+  width: fit-content;
+  min-height: 500px;
+  height: fit-content;
+  margin: auto;
+}
