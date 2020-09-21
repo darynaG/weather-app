@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import * as go from 'gojs';
 import {WeatherService} from './weather.service';
-import {Units} from './Coordinates';
-import {FormControl} from '@angular/forms';
+import {DailyForecast, LocationCoordinates, Units} from './LocationCoordinates';
+
 
 const $ = go.GraphObject.make;
 
@@ -15,23 +15,7 @@ export class AppComponent implements OnInit {
   title = 'weather-app';
 
   public temperatures;
-  public dates;
-  public cities = [
-    {
-      name: 'Lviv',
-      coordinates: {
-        lat: 49.84,
-        lon: 24.02
-      }
-    },
-    {
-      name: 'Kiyv',
-      coordinates: {
-        lat: 50,
-        lon: 30
-      }
-    }
-  ];
+  public forecast: Array<DailyForecast>;
 
   public model: go.GraphLinksModel = $(go.GraphLinksModel,
     {
@@ -43,33 +27,33 @@ export class AppComponent implements OnInit {
   selectedTempUnit: Units;
   eUnits = Units;
 
-  cityControl = new FormControl({
+  cityCoordinates: LocationCoordinates = {
+    name: 'Lviv',
     lat: 49.84,
     lon: 24.02
-  });
+  };
 
   constructor(private weatherService: WeatherService) {
   }
 
   ngOnInit(): void {
     this.selectedTempUnit = Units.Celsius;
-    this.getWeather(this.selectedTempUnit);
+    this.getTemperaturesForChart(this.cityCoordinates, this.selectedTempUnit);
   }
 
-  getWeather(units: Units) {
+  getTemperaturesForChart(location: LocationCoordinates, units: Units) {
     this.temperatures = [];
-    this.dates = [];
-    const coord = this.cityControl.value;
+    this.forecast = [];
 
-    this.weatherService.getForecast(coord, units).subscribe(value => {
+    this.weatherService.getForecast(location, units).subscribe(value => {
       value.daily.map(val => {
         this.temperatures.push(val.temp.eve);
       });
 
-      value.daily.map(val => this.dates.push(
+      value.daily.map(val => this.forecast.push(
         {
           date: val.dt,
-          temp: val.temp.eve
+          temperature: val.temp.eve
         }));
 
       this.model.nodeDataArray = [{
@@ -83,6 +67,6 @@ export class AppComponent implements OnInit {
 
   onChange(value: any) {
     this.selectedTempUnit = value;
-    this.getWeather(this.selectedTempUnit);
+    this.getTemperaturesForChart(this.cityCoordinates, this.selectedTempUnit);
   }
 }

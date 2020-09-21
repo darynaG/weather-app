@@ -2,28 +2,30 @@
   <span>Weather Forecast</span>
   <span class="toolbar-spacer"></span>
   <mat-button-toggle-group #group="matButtonToggleGroup" [value]="selectedTempUnit" (change)="onChange(group.value)">
-    <mat-button-toggle *ngFor="let type of eUnits | keyvalue" [value]="type.value">
-      {{type.key}}
+    <mat-button-toggle [value]="eUnits.Celsius">
+      Celsius
+    </mat-button-toggle>
+    <mat-button-toggle [value]="eUnits.Fahrenheit">
+      Fahrenheit
     </mat-button-toggle>
   </mat-button-toggle-group>
 </mat-toolbar>
 
 <app-chart [model]="model"></app-chart>
 
-<mat-card class="chart-card">
+<mat-card class="card">
   <mat-card-header>
     <mat-card-title>Details</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <ng-container *ngFor="let date of dates" >
+    <ng-container *ngFor="let date of forecast" >
       <div class="list-container">
         <span>
-          {{date.date*1000 | date}} : average - {{date.temp}} {{selectedTempUnit === eUnits.Celsius ? 'C' : 'F'}}
+          {{date.date*1000 | date}} : average - {{date.temperature}} {{selectedTempUnit === eUnits.Celsius ? 'C' : 'F'}}
       </span>
       </div>
     </ng-container>
   </mat-card-content>
-
 </mat-card>
 
 
