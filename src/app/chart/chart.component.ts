@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import * as go from 'gojs';
+import {Spot} from 'gojs';
 
 const $ = go.GraphObject.make;
 
@@ -25,11 +26,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   buildGraph() {
-    this.diagram = $(go.Diagram, 'myDiagramDiv');
+    this.diagram = $(go.Diagram, 'myDiagramDiv',
+      {
+        autoScale: go.Diagram.Uniform,
+        contentAlignment: Spot.Center
+      });
 
-    const SPARK_STROKEWIDTH = 2;
+    const SPARK_STROKEWIDTH = 5;
     const SPARK_INTERVAL = 25;
-    const BASELINE_LENGTH = 30;
+    const BASELINE_LENGTH = 40;
 
     function makeStringFromValues(values) {
       if (values.length < 1) { return 'M 0 ' + values + ' L ' + BASELINE_LENGTH + ' 0'; }
@@ -58,7 +63,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
     const sparkLine = $(go.Panel, 'Horizontal',
       {
-        alignment: go.Spot.Left,
+        alignment: go.Spot.Center,
         alignmentFocusName: 'spark'
       },
 

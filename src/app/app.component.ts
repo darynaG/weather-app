@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import * as go from 'gojs';
-import {WeatherService} from './weather.service';
-import {DailyForecast, LocationCoordinates, Units} from './LocationCoordinates';
+import {WeatherService} from './services/weather.service';
+import {LocationCoordinates} from './helpers/LocationCoordinates';
+import {DailyForecast} from './helpers/DailyForecast';
+import {Units} from './helpers/Units';
 
 
 const $ = go.GraphObject.make;
