@@ -21,7 +21,7 @@
     <ng-container *ngFor="let date of forecast" >
       <div class="list-container">
         <span>
-          {{date.date*1000 | date}} : average - {{date.temperature}} {{selectedTempUnit === eUnits.Celsius ? 'C' : 'F'}}
+          {{date.date*1000 | date}} : average day temperature - {{date.temperature}} {{selectedTempUnit === eUnits.Celsius ? 'C' : 'F'}}
       </span>
       </div>
     </ng-container>

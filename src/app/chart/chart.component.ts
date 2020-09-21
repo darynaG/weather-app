@@ -70,7 +70,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
       new go.Binding('alignmentFocus', 'values', makeAlignmentFromValues),
 
       $(go.TextBlock,
-        { visible: false, margin: 1, font: '11px sans-serif', background: 'white' },
+        { visible: false, margin: 1, font: '20px sans-serif', background: 'white' },
         new go.Binding('alignment', 'values', (values) => {
           let min = Infinity;
           let max = -Infinity;
@@ -98,17 +98,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
     ); // end sparkLine itemTemplate
 
-
     this.diagram.nodeTemplate =
       $(go.Node, 'Auto',
         $(go.Shape, { fill: 'rgba(200,200,255,.3)', strokeWidth: 0 }),
         $(go.Panel, 'Spot',
           { itemTemplate: sparkLine },
           new go.Binding('itemArray', 'items'),
-          $(go.Shape, { width: 1, height: 200, fill: 'red', stroke: null, strokeWidth: 0 })
+          $(go.Shape, { width: 1, height: 600, fill: 'red', stroke: null, strokeWidth: 0 })
         )
       );
-
     this.diagram.model = this.model;
   }
 

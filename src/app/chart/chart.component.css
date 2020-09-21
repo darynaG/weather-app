@@ -1,7 +1,5 @@
 #myDiagramDiv {
   min-width: 50%;
   min-height: 300px;
-  height: fit-content;
-  width: fit-content;
   margin: auto;
 }

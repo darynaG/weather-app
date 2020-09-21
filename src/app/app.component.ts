@@ -5,7 +5,6 @@ import {LocationCoordinates} from './helpers/LocationCoordinates';
 import {DailyForecast} from './helpers/DailyForecast';
 import {Units} from './helpers/Units';
 
-
 const $ = go.GraphObject.make;
 
 @Component({
@@ -49,19 +48,19 @@ export class AppComponent implements OnInit {
 
     this.weatherService.getForecast(location, units).subscribe(value => {
       value.daily.map(val => {
-        this.temperatures.push(val.temp.eve);
+        this.temperatures.push(val.temp.day);
       });
 
       value.daily.map(val => this.forecast.push(
         {
           date: val.dt,
-          temperature: val.temp.eve
+          temperature: val.temp.day
         }));
 
       this.model.nodeDataArray = [{
         key: 'Temperature', items: [
-          {color: 'blue', values: this.temperatures},
-          {color: 'gray', values: [0]}
+          {color: 'blue', values: this.temperatures, label: 'Day temperature'},
+          {color: 'gray', values: [0] }
         ]
       }];
     });
